@@ -1,0 +1,378 @@
+import csv
+import os
+import re
+import sys
+from datetime import datetime
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+import config
+from kalshi_selection_rules import passes_selection_mode
+
+
+INPUT_FILE = 'data/kalshi_sized_signals.csv'
+OUTPUT_FILE = 'data/kalshi_trade_sheet.csv'
+SELECTION_MODE = getattr(config, 'TRADE_SELECTION_MODE', 'balanced')
+
+MONTH_MAP = {
+    'JAN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4,
+    'MAY': 5, 'JUN': 6, 'JUL': 7, 'AUG': 8,
+    'SEP': 9, 'OCT': 10, 'NOV': 11, 'DEC': 12,
+}
+
+
+def safe_float(value, default=None):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def between_range_center(row):
+    low = safe_float(row.get('threshold_low'))
+    high = safe_float(row.get('threshold_high'))
+
+    if low is None or high is None:
+        title = (row.get('title') or '').strip()
+        m = re.search(r'be\s+(\d+)-(\d+)°', title)
+        if m:
+            low = float(m.group(1))
+            high = float(m.group(2))
+
+    if low is None or high is None:
+        return None
+
+    return (low + high) / 2.0
+
+
+def distance_to_center(row):
+    predicted_temp = safe_float(row.get('predicted_temp'))
+    if predicted_temp is None:
+        predicted_temp = safe_float(row.get('predicted_high_temp'))
+    if predicted_temp is None:
+        predicted_temp = safe_float(row.get('predicted_temp_f'))
+
+    center = between_range_center(row)
+    if predicted_temp is None or center is None:
+        return None
+
+    return abs(predicted_temp - center)
+
+
+def distance_to_consensus(row):
+    center = between_range_center(row)
+    consensus_temp = safe_float(row.get('consensus_temp_f'))
+
+    if center is None or consensus_temp is None:
+        return None
+
+    return abs(center - consensus_temp)
+
+
+def is_between_too_close_to_center(row, min_distance=2.0):
+    comparison = (row.get('comparison') or '').strip().lower()
+    if comparison != 'between':
+        return False
+
+    distance = distance_to_center(row)
+    if distance is None:
+        return False
+
+    return distance < min_distance
+
+
+def extract_market_date_from_ticker(ticker):
+    if not ticker:
+        return None
+
+    match = re.search(r'-(\d{2})([A-Z]{3})(\d{2})-', ticker)
+    if not match:
+        return None
+
+    yy, mon_str, dd = match.groups()
+    year = 2000 + int(yy)
+    month = MONTH_MAP.get(mon_str.upper())
+    day = int(dd)
+
+    if not month:
+        return None
+
+    try:
+        return datetime(year, month, day)
+    except ValueError:
+        return None
+
+
+def market_day_offset(ticker, today=None):
+    market_dt = extract_market_date_from_ticker(ticker)
+    if market_dt is None:
+        return None
+
+    if today is None:
+        today = datetime.now()
+
+    return (market_dt.date() - today.date()).days
+
+
+def is_expired(ticker, today=None):
+    offset = market_day_offset(ticker, today=today)
+    if offset is None:
+        return False
+    return offset < 0
+
+
+def is_frozen_market(row):
+    yes_price = safe_float(row.get('yes_ask_percent'))
+    no_price = safe_float(row.get('no_ask_percent'))
+
+    if yes_price is None or no_price is None:
+        return False
+
+    return yes_price >= 99 or yes_price <= 1 or no_price >= 99 or no_price <= 1
+
+
+def is_los_angeles_trade(row):
+    title = (row.get('title') or '').lower()
+    ticker = (row.get('ticker') or '').upper()
+    return ('los angeles' in title) or (' in la ' in title) or ('KXHIGHLAX' in ticker)
+
+
+def enrich_row(row):
+    enriched = dict(row)
+    enriched['day_offset'] = market_day_offset(row.get('ticker') or '')
+    enriched['is_expired'] = is_expired(row.get('ticker') or '')
+    enriched['is_frozen_market'] = is_frozen_market(row)
+    enriched['is_los_angeles_trade'] = is_los_angeles_trade(row)
+    enriched['predicted_temp'] = (
+        row.get('predicted_temp')
+        or row.get('predicted_high_temp')
+        or row.get('predicted_temp_f')
+    )
+    return enriched
+
+
+def freshness_penalty_score(day_offset):
+    if day_offset is None:
+        return -8
+    if day_offset == 1:
+        return 0
+    if day_offset == 0:
+        return -18
+    if day_offset == 2:
+        return -6
+    if day_offset > 2:
+        return -10
+    return -25
+
+
+def base_score(row):
+    action = (row.get('signal_action') or '').strip().upper()
+    confidence = (row.get('confidence_label') or '').strip().upper()
+    comparison = (row.get('comparison') or '').strip().lower()
+    edge_val = abs(safe_float(row.get('edge')) or 0.0)
+    ai_probability_yes = safe_float(row.get('ai_probability_yes'))
+
+    score = 0
+
+    if action == 'BUY_NO_STRONG':
+        score += 40
+    elif action == 'BUY_NO':
+        score += 25
+
+    if comparison == 'between':
+        score += 30
+    elif comparison == 'less_than':
+        score += 10
+
+    if confidence == 'HIGH':
+        score += 15
+    elif confidence == 'MEDIUM':
+        score += 8
+
+    if edge_val >= 25:
+        score += 25
+    elif edge_val >= 15:
+        score += 18
+    elif edge_val >= 10:
+        score += 12
+    elif edge_val >= 5:
+        score += 6
+
+    if comparison == 'less_than' and action != 'BUY_NO_STRONG':
+        score -= 8
+
+    if ai_probability_yes is not None and ai_probability_yes <= 5:
+        score += 12
+    elif ai_probability_yes is not None and ai_probability_yes <= 10:
+        score += 6
+
+    if SELECTION_MODE == 'high_precision':
+        score += 15
+
+    return score
+
+
+def get_priority(row):
+    ticker = row.get('ticker') or ''
+    day_offset = market_day_offset(ticker)
+    score = base_score(row) + freshness_penalty_score(day_offset)
+
+    if score >= 95:
+        priority = 'TOP'
+    elif score >= 75:
+        priority = 'HIGH'
+    elif score >= 50:
+        priority = 'MEDIUM'
+    else:
+        priority = 'LOW'
+
+    if day_offset == 0 and priority == 'TOP' and SELECTION_MODE != 'high_precision':
+        priority = 'HIGH'
+
+    return priority
+
+
+def estimate_entry_cost(signal_action, recommended_notional_usd, yes_price_percent, no_price_percent):
+    action = (signal_action or '').strip().upper()
+    notional = safe_float(recommended_notional_usd)
+    yes_price = safe_float(yes_price_percent)
+    no_price = safe_float(no_price_percent)
+
+    if notional is None:
+        return None
+
+    if action in ['BUY_YES', 'BUY_YES_STRONG'] and yes_price is not None:
+        return round(notional * (yes_price / 100.0), 2)
+    if action in ['BUY_NO', 'BUY_NO_STRONG'] and no_price is not None:
+        return round(notional * (no_price / 100.0), 2)
+
+    return None
+
+
+def sort_key(row):
+    priority_rank = {'TOP': 0, 'HIGH': 1, 'MEDIUM': 2, 'LOW': 3}
+    edge_val = abs(safe_float(row.get('edge')) or 0.0)
+    day_offset = market_day_offset(row.get('ticker') or '')
+    ai_probability_yes = safe_float(row.get('ai_probability_yes')) or 100.0
+
+    if day_offset == 1:
+        day_rank = 0
+    elif day_offset == 0:
+        day_rank = 1
+    else:
+        day_rank = 2
+
+    return (priority_rank.get(row.get('priority'), 9), day_rank, ai_probability_yes, -edge_val)
+
+
+def main():
+    if not os.path.exists(INPUT_FILE):
+        print('File not found:', INPUT_FILE)
+        return
+
+    rows_out = []
+
+    with open(INPUT_FILE, 'r', encoding='utf-8') as file_obj:
+        reader = csv.DictReader(file_obj)
+
+        for row in reader:
+            enriched = enrich_row(row)
+
+            if not passes_selection_mode(enriched, SELECTION_MODE):
+                continue
+
+            if is_between_too_close_to_center(enriched, min_distance=2.0):
+                enriched['filter_reason'] = 'between_too_close_to_center'
+                continue
+
+            signal_action = row.get('signal_action')
+            yes_price = row.get('yes_ask_percent')
+            no_price = row.get('no_ask_percent')
+            recommended_notional_usd = row.get('recommended_stake_usd')
+            estimated_entry_cost_usd = estimate_entry_cost(
+                signal_action,
+                recommended_notional_usd,
+                yes_price,
+                no_price,
+            )
+            range_center = between_range_center(enriched)
+            center_distance = distance_to_center(enriched)
+            consensus_distance = distance_to_consensus(enriched)
+
+            rows_out.append({
+                'ticker': row.get('ticker'),
+                'title': row.get('title'),
+                'comparison': row.get('comparison'),
+                'threshold_low': row.get('threshold_low'),
+                'threshold_high': row.get('threshold_high'),
+                'predicted_temp_f': row.get('predicted_temp_f'),
+                'std_dev': row.get('std_dev'),
+                'consensus_temp_f': row.get('consensus_temp_f'),
+                'consensus_spread_f': row.get('consensus_spread_f'),
+                'consensus_ok': row.get('consensus_ok'),
+                'yes_allowed': row.get('yes_allowed'),
+                'openmeteo_temp': row.get('openmeteo_temp'),
+                'noaa_temp': row.get('noaa_temp'),
+                'nasa_monitor_temp': row.get('nasa_monitor_temp'),
+                'range_center': round(range_center, 2) if range_center is not None else '',
+                'distance_to_center': round(center_distance, 2) if center_distance is not None else '',
+                'distance_to_consensus': round(consensus_distance, 2) if consensus_distance is not None else '',
+                'signal_action': signal_action,
+                'confidence_label': row.get('confidence_label'),
+                'priority': get_priority(enriched),
+                'selection_mode': SELECTION_MODE,
+                'ai_probability_yes': row.get('ai_probability_yes'),
+                'yes_price_percent': yes_price,
+                'no_price_percent': no_price,
+                'edge': row.get('edge'),
+                'recommended_stake_usd': recommended_notional_usd,
+                'estimated_entry_cost_usd': estimated_entry_cost_usd,
+                'estimated_trade_cost_usd': estimated_entry_cost_usd,
+            })
+
+    rows_out.sort(key=sort_key)
+
+    with open(OUTPUT_FILE, 'w', newline='', encoding='utf-8') as file_obj:
+        fieldnames = [
+            'ticker',
+            'title',
+            'comparison',
+            'threshold_low',
+            'threshold_high',
+            'predicted_temp_f',
+            'std_dev',
+            'consensus_temp_f',
+            'consensus_spread_f',
+            'consensus_ok',
+            'yes_allowed',
+            'openmeteo_temp',
+            'noaa_temp',
+            'nasa_monitor_temp',
+            'range_center',
+            'distance_to_center',
+            'distance_to_consensus',
+            'signal_action',
+            'confidence_label',
+            'priority',
+            'selection_mode',
+            'ai_probability_yes',
+            'yes_price_percent',
+            'no_price_percent',
+            'edge',
+            'recommended_stake_usd',
+            'estimated_entry_cost_usd',
+            'estimated_trade_cost_usd',
+        ]
+        writer = csv.DictWriter(file_obj, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows_out)
+
+    print('=' * 80)
+    print(f'DISCIPLINED TRADE SHEET GENERATED [{SELECTION_MODE}]')
+    print('=' * 80)
+    print('Trades kept :', len(rows_out))
+    print(f'Saved to {OUTPUT_FILE}')
+
+
+if __name__ == '__main__':
+    main()

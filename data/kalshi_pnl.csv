@@ -1,0 +1,6 @@
+ticker,title,decision,yes_ask_percent,ai_probability_yes,edge,resolved_outcome,trade_result,pnl_percent
+KXHIGHLAX-26MAR19-T90,"Will the **high temp in LA** be >90° on Mar 19, 2026?",BUY_NO,41.0,6.84,,NO,WIN,41.0
+KXHIGHLAX-26MAR19-T83,"Will the **high temp in LA** be <83° on Mar 19, 2026?",BUY_YES,33.0,64.88,,YES,WIN,67.0
+KXHIGHLAX-26MAR18-T89,"Will the **high temp in LA** be >89° on Mar 18, 2026?",BUY_NO,33.0,0.25,,NO,WIN,33.0
+KXHIGHLAX-26MAR18-T82,"Will the **high temp in LA** be <82° on Mar 18, 2026?",BUY_YES,3.0,24.35,,YES,WIN,97.0
+KXHIGHLAX-26MAR18-B88.5,"Will the **high temp in LA** be 88-89° on Mar 18, 2026?",BUY_NO,21.0,0.81,,NO,WIN,21.0

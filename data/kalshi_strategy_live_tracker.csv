@@ -1,0 +1,63 @@
+2026-04-11,KXHIGHLAX-26APR11-T71,"Will the high temp in LA be >71° on Apr 11, 2026?",greater_than,BUY_YES_STRONG,LA,YES,LOSS
+2026-04-11,KXHIGHLAX-26APR11-B68.5,"Will the high temp in LA be 68-69° on Apr 11, 2026?",between,BUY_NO_STRONG,LA,NO,LOSS
+2026-04-11,KXHIGHLAX-26APR11-B66.5,"Will the high temp in LA be 66-67° on Apr 11, 2026?",between,BUY_NO_STRONG,LA,NO,WIN
+2026-04-11,KXHIGHLAX-26APR11-B64.5,"Will the high temp in LA be 64-65° on Apr 11, 2026?",between,BUY_NO,LA,NO,WIN
+
+2026-04-11,KXHIGHNY-26APR11-T68,"Will the high temp in NYC be >68° on Apr 11, 2026?",greater_than,BUY_YES,NYC,YES,LOSS
+2026-04-11,KXHIGHNY-26APR11-T61,"Will the high temp in NYC be <61° on Apr 11, 2026?",less_than,BUY_YES_STRONG,NYC,YES,LOSS
+2026-04-11,KXHIGHNY-26APR11-B65.5,"Will the high temp in NYC be 65-66° on Apr 11, 2026?",between,BUY_NO,NYC,NO,WIN
+2026-04-11,KXHIGHNY-26APR11-B63.5,"Will the high temp in NYC be 63-64° on Apr 11, 2026?",between,BUY_NO_STRONG,NYC,NO,LOSS
+2026-04-11,KXHIGHNY-26APR11-B61.5,"Will the high temp in NYC be 61-62° on Apr 11, 2026?",between,BUY_NO_STRONG,NYC,NO,WIN
+
+2026-04-11,KXHIGHCHI-26APR11-T51,"Will the high temp in Chicago be <51° on Apr 11, 2026?",less_than,BUY_YES,Chicago,YES,LOSS
+2026-04-11,KXHIGHCHI-26APR11-B57.5,"Will the high temp in Chicago be 57-58° on Apr 11, 2026?",between,BUY_NO_STRONG,Chicago,NO,WIN
+2026-04-11,KXHIGHCHI-26APR11-B55.5,"Will the high temp in Chicago be 55-56° on Apr 11, 2026?",between,BUY_NO,Chicago,NO,WIN
+2026-04-11,KXHIGHCHI-26APR11-B53.5,"Will the high temp in Chicago be 53-54° on Apr 11, 2026?",between,BUY_NO,Chicago,NO,WIN
+
+2026-04-12,KXHIGHLAX-26APR12-T68,"Will the high temp in LA be >68° on Apr 12, 2026?",greater_than,BUY_YES_STRONG,LA,YES,WIN
+2026-04-12,KXHIGHLAX-26APR12-B67.5,"Will the high temp in LA be 67-68° on Apr 12, 2026?",between,BUY_NO,LA,NO,WIN
+2026-04-12,KXHIGHLAX-26APR12-B65.5,"Will the high temp in LA be 65-66° on Apr 12, 2026?",between,BUY_NO_STRONG,LA,NO,WIN
+2026-04-12,KXHIGHLAX-26APR12-B63.5,"Will the high temp in LA be 63-64° on Apr 12, 2026?",between,BUY_NO_STRONG,LA,NO,WIN
+
+2026-04-12,KXHIGHNY-26APR12-T63,"Will the high temp in NYC be >63° on Apr 12, 2026?",greater_than,BUY_YES_STRONG,NYC,YES,LOSS
+2026-04-12,KXHIGHNY-26APR12-B58.5,"Will the high temp in NYC be 58-59° on Apr 12, 2026?",between,BUY_NO,NYC,NO,WIN
+2026-04-12,KXHIGHNY-26APR12-B56.5,"Will the high temp in NYC be 56-57° on Apr 12, 2026?",between,BUY_NO_STRONG,NYC,NO,WIN
+
+2026-04-12,KXHIGHCHI-26APR12-T81,"Will the high temp in Chicago be >81° on Apr 12, 2026?",greater_than,BUY_NO_STRONG,Chicago,NO,WIN
+2026-04-12,KXHIGHCHI-26APR12-T74,"Will the high temp in Chicago be <74° on Apr 12, 2026?",less_than,BUY_YES_STRONG,Chicago,YES,LOSS
+2026-04-12,KXHIGHCHI-26APR12-B80.5,"Will the high temp in Chicago be 80-81° on Apr 12, 2026?",between,BUY_NO_STRONG,Chicago,NO,LOSS
+2026-04-12,KXHIGHCHI-26APR12-B78.5,"Will the high temp in Chicago be 78-79° on Apr 12, 2026?",between,BUY_NO_STRONG,Chicago,NO,WIN
+2026-04-12,KXHIGHCHI-26APR12-B76.5,"Will the high temp in Chicago be 76-77° on Apr 12, 2026?",between,BUY_NO,Chicago,NO,WIN
+
+2026-04-13,KXHIGHLAX-26APR13-B66.5,"Will the high temp in LA be 66-67° on Apr 13, 2026?",between,BUY_NO_STRONG,LA,NO,LOSS
+2026-04-13,KXHIGHLAX-26APR13-B64.5,"Will the high temp in LA be 64-65° on Apr 13, 2026?",between,BUY_NO_STRONG,LA,NO,WIN
+2026-04-13,KXHIGHNY-26APR13-B78.5,"Will the high temp in NYC be 78-79° on Apr 13, 2026?",between,BUY_NO_STRONG,NYC,NO,LOSS
+2026-04-13,KXHIGHCHI-26APR13-B78.5,"Will the high temp in Chicago be 78-79° on Apr 13, 2026?",between,BUY_NO_STRONG,Chicago,NO,LOSS
+2026-04-13,KXHIGHNY-26APR13-B80.5,"Will the high temp in NYC be 80-81° on Apr 13, 2026?",between,BUY_NO_STRONG,NYC,NO,WIN
+2026-04-13,KXHIGHCHI-26APR13-B80.5,"Will the high temp in Chicago be 80-81° on Apr 13, 2026?",between,BUY_NO_STRONG,Chicago,NO,WIN
+2026-04-13,KXHIGHNY-26APR13-B76.5,"Will the high temp in NYC be 76-77° on Apr 13, 2026?",between,BUY_NO,NYC,NO,WIN
+2026-04-13,KXHIGHCHI-26APR13-B76.5,"Will the high temp in Chicago be 76-77° on Apr 13, 2026?",between,BUY_NO,Chicago,NO,WIN
+
+2026-04-14,KXHIGHLAX-26APR14-B69.5,"Will the high temp in LA be 69-70° on Apr 14, 2026?",between,BUY_NO_STRONG,LA,NO,LOSS
+2026-04-14,KXHIGHNY-26APR14-B85.5,"Will the high temp in NYC be 85-86° on Apr 14, 2026?",between,BUY_NO_STRONG,NYC,NO,WIN
+2026-04-14,KXHIGHNY-26APR14-B83.5,"Will the high temp in NYC be 83-84° on Apr 14, 2026?",between,BUY_NO_STRONG,NYC,NO,WIN
+2026-04-14,KXHIGHCHI-26APR14-B80.5,"Will the high temp in Chicago be 80-81° on Apr 14, 2026?",between,BUY_NO_STRONG,Chicago,NO,WIN
+2026-04-14,KXHIGHCHI-26APR14-B82.5,"Will the high temp in Chicago be 82-83° on Apr 14, 2026?",between,BUY_NO_STRONG,Chicago,NO,LOSS
+2026-04-14,KXHIGHCHI-26APR14-B78.5,"Will the high temp in Chicago be 78-79° on Apr 14, 2026?",between,BUY_NO,Chicago,NO,WIN
+
+2026-04-15,KXHIGHLAX-26APR15-B70.5,"Will the high temp in LA be 70-71° on Apr 15, 2026?",between,BUY_NO_STRONG,LA,NO,LOSS
+2026-04-15,KXHIGHNY-26APR15-B89.5,"Will the high temp in NYC be 89-90° on Apr 15, 2026?",between,BUY_NO_STRONG,NYC,NO,LOSS
+2026-04-15,KXHIGHNY-26APR15-B87.5,"Will the high temp in NYC be 87-88° on Apr 15, 2026?",between,BUY_NO_STRONG,NYC,NO,WIN
+2026-04-15,KXHIGHCHI-26APR15-B73.5,"Will the high temp in Chicago be 73-74° on Apr 15, 2026?",between,BUY_NO_STRONG,Chicago,NO,LOSS
+2026-04-15,KXHIGHCHI-26APR15-B75.5,"Will the high temp in Chicago be 75-76° on Apr 15, 2026?",between,BUY_NO_STRONG,Chicago,NO,WIN
+2026-04-15,KXHIGHLAX-26APR15-B68.5,"Will the high temp in LA be 68-69° on Apr 15, 2026?",between,BUY_NO_STRONG,LA,NO,WIN
+2026-04-15,KXHIGHNY-26APR15-B85.5,"Will the high temp in NYC be 85-86° on Apr 15, 2026?",between,BUY_NO,NYC,NO,
+
+2026-04-16,KXHIGHCHI-26APR16-B72.5,"Will the high temp in Chicago be 72-73° on Apr 16, 2026?",between,BUY_NO_STRONG,Chicago,NO,WIN
+2026-04-16,KXHIGHCHI-26APR16-B70.5,"Will the high temp in Chicago be 70-71° on Apr 16, 2026?",between,BUY_NO_STRONG,Chicago,NO,WIN
+2026-04-16,KXHIGHLAX-26APR16-B67.5,"Will the high temp in LA be 67-68° on Apr 16, 2026?",between,BUY_NO_STRONG,LA,NO,WIN
+2026-04-16,KXHIGHLAX-26APR16-B69.5,"Will the high temp in LA be 69-70° on Apr 16, 2026?",between,BUY_NO_STRONG,LA,NO,LOSS
+2026-04-16,KXHIGHLAX-26APR16-B71.5,"Will the high temp in LA be 71-72° on Apr 16, 2026?",between,BUY_NO_STRONG,LA,NO,WIN
+2026-04-16,KXHIGHNY-26APR16-B88.5,"Will the high temp in NYC be 88-89° on Apr 16, 2026?",between,BUY_NO_STRONG,NYC,NO,LOSS
+2026-04-16,KXHIGHNY-26APR16-B90.5,"Will the high temp in NYC be 90-91° on Apr 16, 2026?",between,BUY_NO_STRONG,NYC,NO,WIN
+2026-04-16,KXHIGHNY-26APR16-B86.5,"Will the high temp in NYC be 86-87° on Apr 16, 2026?",between,BUY_NO_STRONG,NYC,NO,WIN

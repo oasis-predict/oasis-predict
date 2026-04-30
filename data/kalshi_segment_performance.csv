@@ -1,0 +1,44 @@
+source,segment,group_type,group_key,trades,wins,losses,win_rate_pct,avg_pnl,total_pnl,avg_edge
+backtest,all,overall,ALL,271,215,56,79.34,-19.58,-5305.0,-9.24
+backtest,all,city,Los Angeles,271,215,56,79.34,-19.58,-5305.0,-9.24
+backtest,all,comparison,greater_than,35,26,9,74.29,-25.71,-900.0,-26.59
+backtest,all,comparison,less_than,44,35,9,79.55,-20.45,-900.0,-22.8
+backtest,all,comparison,between,192,154,38,80.21,-18.26,-3505.0,-2.96
+backtest,all,action,BUY_YES,13,2,11,15.38,-84.62,-1100.0,-30.63
+backtest,all,action,BUY_NO,258,213,45,82.56,-16.3,-4205.0,-8.16
+backtest,disciplined,overall,ALL,234,189,45,80.77,-17.97,-4205.0,-6.51
+backtest,disciplined,city,Los Angeles,234,189,45,80.77,-17.97,-4205.0,-6.51
+backtest,disciplined,comparison,less_than,42,35,7,83.33,-16.67,-700.0,-22.75
+backtest,disciplined,comparison,between,192,154,38,80.21,-18.26,-3505.0,-2.96
+backtest,disciplined,action,BUY_NO,234,189,45,80.77,-17.97,-4205.0,-6.51
+backtest,high_precision,overall,ALL,5,5,0,100.0,0.0,0.0,-4.46
+backtest,high_precision,city,Los Angeles,5,5,0,100.0,0.0,0.0,-4.46
+backtest,high_precision,comparison,between,5,5,0,100.0,0.0,0.0,-4.46
+backtest,high_precision,action,BUY_NO,5,5,0,100.0,0.0,0.0,-4.46
+live_tracker,all,overall,ALL,110,70,40,63.64,3.12,240.59,
+live_tracker,all,city,NYC,37,22,15,59.46,0.1,2.68,
+live_tracker,all,city,LA,31,20,11,64.52,1.08,25.82,
+live_tracker,all,city,Chicago,42,28,14,66.67,8.16,212.09,
+live_tracker,all,comparison,greater_than,13,1,12,7.69,-22.7,-272.36,
+live_tracker,all,comparison,between,81,63,18,77.78,13.21,687.18,
+live_tracker,all,comparison,less_than,16,6,10,37.5,-13.4,-174.23,
+live_tracker,all,action,BUY_YES_STRONG,12,1,11,8.33,-26.86,-295.51,
+live_tracker,all,action,BUY_NO_STRONG,51,36,15,70.59,8.11,202.76,
+live_tracker,all,action,BUY_NO,36,31,5,86.11,16.38,491.34,
+live_tracker,all,action,BUY_YES,11,2,9,18.18,-14.36,-158.0,
+live_tracker,disciplined,overall,ALL,85,67,18,78.82,14.22,753.45,
+live_tracker,disciplined,city,NYC,27,21,6,77.78,13.4,227.77,
+live_tracker,disciplined,city,LA,23,19,4,82.61,11.45,183.14,
+live_tracker,disciplined,city,Chicago,35,27,8,77.14,17.13,342.54,
+live_tracker,disciplined,comparison,between,80,63,17,78.75,13.94,711.04,
+live_tracker,disciplined,comparison,less_than,5,4,1,80.0,21.2,42.41,
+live_tracker,disciplined,action,BUY_NO_STRONG,50,36,14,72.0,10.0,240.05,
+live_tracker,disciplined,action,BUY_NO,35,31,4,88.57,17.7,513.4,
+executed_trades,all,overall,ALL,1,1,0,100.0,11.2,11.2,18.95
+executed_trades,all,city,Chicago,1,1,0,100.0,11.2,11.2,18.95
+executed_trades,all,comparison,between,1,1,0,100.0,11.2,11.2,18.95
+executed_trades,all,action,BUY_NO,1,1,0,100.0,11.2,11.2,18.95
+executed_trades,disciplined,overall,ALL,1,1,0,100.0,11.2,11.2,18.95
+executed_trades,disciplined,city,Chicago,1,1,0,100.0,11.2,11.2,18.95
+executed_trades,disciplined,comparison,between,1,1,0,100.0,11.2,11.2,18.95
+executed_trades,disciplined,action,BUY_NO,1,1,0,100.0,11.2,11.2,18.95

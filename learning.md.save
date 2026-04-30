@@ -1,0 +1,597 @@
+========================================
+LEARNING LOG - WEATHER AI AGENT
+========================================
+
+DATE: 2026-03-24
+
+SIGNALS GENERATED:élevé (multi-city actif)
+TRADES TAKEN:11 (paper trading)
+CITIES:
+- LA
+-NYC
+-Chicago
+
+MARKET TYPES:
+- greater_than: actif
+- less_than: actif
+- between: actif
+
+EXECUTED TRADES (non-zero price):
+
+TOP:
+- KXHIGHNY-26MAR24-T53 → BUY_YES_STRONG
+- KXHIGHCHI-26MAR24-T57 → BUY_YES_STRONG
+- KXHIGHNY-26MAR24-B48.5 → BUY_NO_STRONG
+- KXHIGHCHI-26MAR24-B52.5 → BUY_NO_STRONG
+- KXHIGHNY-26MAR24-B46.5 → BUY_NO_STRONG
+- KXHIGHCHI-26MAR24-B50.5 → BUY_NO_STRONG
+
+HIGH:
+- KXHIGHCHI-26MAR24-B54.5 → BUY_NO
+- KXHIGHNY-26MAR24-B50.5 → BUY_NO
+- KXHIGHCHI-26MAR24-T50 → BUY_NO
+- KXHIGHNY-26MAR24-T46 → BUY_NO
+
+MEDIUM:
+- KXHIGHLAX-26MAR24-T76 → BUY_NO
+
+----------------------------------------
+
+WATCHLIST (price = 0, not executed):
+
+- Plusieurs marchés Mar 25 avec YES price = 0.0
+- Considérés comme non exécutables ou à vérifier
+
+----------------------------------------
+
+OBSERVATIONS:
+- Multi-city fonctionne très bien
+- NYC et Chicago produisent beaucoup d’edges forts
+- Beaucoup de BUY_NO_STRONG sur between
+- greater_than produit des BUY_YES_STRONG très forts
+- Plusieurs marchés avec prix = 0 → problème de qualité des données
+
+
+WHAT LOOKS GOOD:
+- Edges très élevés sur NYC et Chicago
+- BUY_YES_STRONG et BUY_NO_STRONG très fréquents
+- Bon volume de trades → bon apprentissage
+
+WHAT LOOKS BAD:
+- Prix à 0.0 sur plusieurs marchés (problème de liquidité ou parsing)
+- Risque de compter de faux trades si non filtré
+
+
+NOTES:
+- Garder seulement trades avec prix réel pour analyse
+- Continuer mode apprentissage large
+- Ne pas tirer de conclusion trop tôt
+
+
+----------------------------------------
+DATE: 2026-03-24
+
+SIGNALS GENERATED: 12
+
+CITIES: Los Angeles, New York, Chicago
+
+MARKET TYPES:
+- greater_than: 3
+- less_than: 3
+- between: 6
+
+AUTO NOTES:
+- System running in learning mode
+- Multi-city active
+- Data collection in progress
+
+
+----------------------------------------
+DATE: 2026-03-24
+
+SIGNALS GENERATED: 12
+
+CITIES: New York, Chicago, Los Angeles
+
+MARKET TYPES:
+- greater_than: 3
+- less_than: 3
+- between: 6
+
+AUTO NOTES:
+- System running in learning mode
+- Multi-city active
+- Data collection in progress
+
+
+----------------------------------------
+DATE: 2026-03-24
+
+SIGNALS GENERATED: 12
+
+CITIES: New York, Chicago, Los Angeles
+
+MARKET TYPES:
+- greater_than: 3
+- less_than: 3
+- between: 6
+
+AUTO NOTES:
+- System running in learning mode
+- Multi-city active
+- Data collection in progress
+
+
+----------------------------------------
+DATE: 2026-03-24 11:40:48
+
+SIGNALS GENERATED: 12
+
+CITIES: Chicago, Los Angeles, New York
+
+MARKET TYPES:
+- greater_than: 3
+- less_than: 3
+- between: 6
+
+AUTO NOTES:
+- System running in learning mode
+- Multi-city active
+- Data collection in progress
+
+----------------------------------------
+DATE: 2026-03-25
+
+HUMAN OBSERVATION:
+
+- Beaucoup de BUY_NO_STRONG sur between (NYC et Chicago)
+- BUY_YES_STRONG surtout sur less_than et greater_than
+- NYC et Chicago produisent les meilleurs edges
+- LA produit moins d’opportunités fortes
+
+- Le système génère beaucoup plus de trades qu’avant (multi-city actif)
+- Les edges sont élevés → bon signe en phase d’apprentissage
+
+- Structure des trades cohérente
+- Pas de problème de prix à 0 aujourd’hui → meilleure qualité de données
+
+----------------------------------------
+
+DECISION NOTES:
+
+- J’ai pris les TOP trades + quelques HIGH
+- Focus sur qualité plutôt que quantité
+- Mode apprentissage maintenu
+
+----------------------------------------
+
+----------------------------------------
+DATE: 2026-03-26
+
+HUMAN OBSERVATION:
+
+- Beaucoup de BUY_NO_STRONG sur LA (between)
+- LA génère beaucoup d’opportunités aujourd’hui
+- NYC présente des signaux mixed (YES et NO)
+- Chicago moins actif aujourd’hui
+
+- Les edges sont élevés sur les ranges (between)
+- Bon équilibre entre TOP, HIGH et MEDIUM
+
+----------------------------------------
+
+WHAT WORKED:
+
+- Strong signals sur LA
+- Multi-city continue de produire des opportunités
+- Bon volume de trades pour apprentissage
+
+----------------------------------------
+
+WHAT LOOKS BAD:
+
+- Présence de prix à 0 (marché non exploitable)
+- Certains marchés du 25 encore présents → à surveiller
+
+----------------------------------------
+
+DECISION NOTES:
+
+- Exclusion des trades avec prix = 0
+- Sélection des trades propres uniquement
+- Mode apprentissage maintenu
+
+----------------------------------------
+
+DATE: 2026-03-25
+
+KEY INSIGHTS:
+
+- Strong edge detected on BUY_NO for BETWEEN markets
+- BETWEEN markets are rarely hit exactly → high probability of NO winning
+
+- BUY_YES_STRONG signals are unreliable
+- Directional predictions (greater_than / less_than) show more variance
+
+- System tends to overestimate extreme probabilities (AI PROB too high)
+
+- Precision risk: losses occur when temperature falls exactly in predicted range
+
+CITY OBSERVATIONS:
+
+- NYC: stable, good for range-based NO trades
+- LA: more unpredictable, weaker directional accuracy
+- Chicago: strong performance on BETWEEN NO trades
+
+STRATEGY NOTES:
+
+- Focus on BUY_NO for BETWEEN markets as core strategy
+- Be cautious with BUY_YES_STRONG signals
+- Avoid overconfidence in high AI probabilities
+- Continue collecting data before adjusting rules
+
+----------------------------------------
+
+📊 Learning Report — 25 & 26 March 2026
+
+🧠 Summary
+
+- Total Trades: 24
+- Wins: 13
+- Losses: 11
+- Win Rate: ~54%
+- Bankroll: 1000 → 1043.37
+- Return: +4.34%
+
+---
+
+📍 Market Insights
+
+1. Strong Performance on "BETWEEN" Markets (BUY_NO)
+
+- Most profitable trades came from:
+  - BUY_NO
+  - BUY_NO_STRONG
+- Especially effective when:
+  - AI probability is very low
+  - Market overprices YES
+
+👉 Insight:
+
+«BETWEEN markets are often mispriced → strong edge on NO side»
+
+---
+
+2. Weakness on Some BUY_YES Trades
+
+- Several losses came from:
+  - BUY_YES
+  - BUY_YES_STRONG
+- Especially when:
+  - threshold too aggressive (e.g. <65, >72)
+
+👉 Insight:
+
+«BUY_YES requires higher confidence threshold»
+
+---
+
+3. Temperature Clustering Effect
+
+Observed:
+
+- Temps often fall near mid-range (e.g. 70–75)
+
+Impact:
+
+- BETWEEN ranges close to actual temp are dangerous
+- Far ranges = safer BUY_NO
+
+👉 Insight:
+
+«Avoid mid-range BETWEEN zones»
+
+---
+
+4. Risk Model Stability
+
+- Fixed risk (2–3%) worked well
+- No large drawdowns
+- Smooth bankroll growth
+
+👉 Insight:
+
+«Risk model is stable → keep current sizing»
+
+---
+
+📊 City Observations
+
+🌆 Los Angeles
+
+- Stable temperatures
+- Good performance on BUY_NO BETWEEN
+
+🏙️ New York
+
+- More volatility
+- BUY_YES less reliable
+
+🌇 Chicago
+
+- Extreme ranges easier to exploit
+- Strong BUY_NO performance
+
+---
+
+⚠️ Mistakes Identified
+
+- Some trades taken outside optimal date window
+- Tracker formatting errors (fixed)
+- Missing early bankroll updates (fixed)
+
+---
+
+🚀 Strategy Improvements
+
+Immediate
+
+- Focus more on:
+  - BUY_NO_STRONG
+  - low AI probability setups
+
+Avoid
+
+- Weak BUY_YES signals
+- BETWEEN near expected temperature
+
+---
+
+🔮 Next Steps
+
+- Continue data collection (target: 100+ trades)
+- Analyze:
+  - PnL per strategy type
+  - PnL per city
+  - Edge vs outcome correlation
+
+---
+
+🧠 Key Learning
+
+«Profitability comes from small consistent edges, not high win rates.»
+
+«The system shows early signs of positive expectancy.»
+
+# Learning Log
+
+## 📅 Date: 2026-03-28
+
+### 📊 Résumé
+- Trades: 14
+- Wins: 9
+- Losses: 5
+- Return: +X%
+
+---
+
+## ✅ Ce qui marche
+
+- BUY_NO_STRONG sur between → très fiable
+- Edge élevé (>20) → souvent gagnant
+- YES très bas (1–5%) → bonnes opportunités
+
+---
+
+## ❌ Ce qui marche moins
+
+- BUY_YES sur greater_than borderline → pertes
+- marchés proches de la limite (ex: 44 vs >44)
+
+---
+
+## 🧠 Observations
+
+- Les marchés "between" sont plus prévisibles
+- Les erreurs viennent souvent des seuils exacts
+- Le modèle surestime certains greater_than
+
+---
+
+## ⚠️ À surveiller
+
+- greater_than proches du seuil
+- low edge (5–10)
+
+---
+
+## 💡 Idées futures (NE PAS IMPLÉMENTER)
+
+- filtrer greater_than borderline
+- renforcer between strong
+
+## 📊 Audit (54 trades)
+
+### Points forts
+- BUY_NO très performant (81%)
+- BETWEEN très fiable (75%)
+- Chicago meilleur marché
+
+### Points faibles
+- BUY_YES très mauvais (12.5%)
+- BUY_YES_STRONG catastrophique (0%)
+- GREATER_THAN non fiable (0%)
+
+### Observations
+- Le système est meilleur pour prédire ce qui n’arrivera pas
+- Les événements extrêmes sont mal estimés
+- Le modèle surestime certaines probabilités YES
+
+### À surveiller
+- tous les BUY_YES
+- tous les greater_than
+- LA (moins fiable)
+
+## 📅 Date: 2026-03-30 / 2026-03-31 Update
+
+### 📊 Résumé global
+- Trades résolus: 65
+- Wins: 38
+- Losses: 27
+- Win rate: ~58.5%
+- Bankroll: 1000 → 1244.85
+- Return: +24.48%
+
+---
+
+## ✅ Ce qui marche
+
+- BUY_NO reste le cœur du système
+- BUY_NO_STRONG continue de bien performer
+- Les marchés BETWEEN restent la meilleure zone d’edge
+- Chicago reste une ville solide
+- Le système reste profitable sans modification du moteur
+
+---
+
+## ❌ Ce qui marche moins
+
+- BUY_YES reste fragile
+- BUY_YES_STRONG reste dangereux
+- GREATER_THAN reste le point faible du système
+- Certains seuils exacts cassent les trades directionnels
+
+---
+
+## 🧠 Observations
+
+- Le système gagne surtout en pariant contre des ranges surévaluées
+- Le vrai edge semble être anti-overpricing sur BETWEEN
+- La rentabilité est réelle même avec un win rate qui n’a rien d’extraordinaire
+- Le système fonctionne mieux avec discipline qu’avec optimisation manuelle
+
+---
+
+## 📍 Audit connu à ce stade
+
+- greater_than = très faible
+- between = très fort
+- BUY_NO = meilleur signal
+- BUY_YES = plus faible
+- Chicago = meilleure ville
+- LA = plus irrégulière
+- NYC = intermédiaire
+
+---
+
+## ⚠️ À surveiller
+
+- Tous les BUY_YES_STRONG
+- Tous les greater_than
+- Les seuils exacts (<72, >44, etc.)
+- Les trades proches de la température réelle attendue
+
+---
+
+## 💡 Idées futures (NE PAS IMPLÉMENTER MAINTENANT)
+
+- Réduire ou filtrer BUY_YES_STRONG
+- Réduire l’exposition sur greater_than
+- Renforcer la logique BUY_NO / BETWEEN
+- Ajouter plus tard une mise à jour météo dynamique via API
+- Automatiser l’intelligence après suffisamment de trades (~100)
+
+---
+
+## 🚀 Décision
+
+- On ne change rien au moteur
+- On continue la baseline telle quelle
+- Objectif suivant: 80 puis 100 trades
+- Ensuite: test réel avec petits montants
+
+[01/04/2026 14:30] Duc: ## 📅 Date: 2026-04-01 Update
+
+### 📊 Résumé global
+- Trades résolus: 77
+- Wins: 45
+- Losses: 32
+- Win rate: ~58.4%
+- Bankroll: 1000 → 1240.59
+- Return: +24.06%
+
+---
+
+## ✅ Ce qui marche
+
+- Le système reste rentable après 77 trades
+- BUY_NO reste le meilleur signal
+- BUY_NO_STRONG continue de bien performer
+- BETWEEN reste la zone principale d’edge
+- Chicago reste une ville solide
+- Le système tient dans le temps sans modification du moteur
+
+---
+
+## ❌ Ce qui marche moins
+
+- BUY_YES reste fragile
+- BUY_YES_STRONG reste dangereux
+- GREATER_THAN reste faible
+- Les trades directionnels proches d’un seuil strict restent risqués
+- LA reste plus irrégulière que Chicago
+
+---
+
+## 🧠 Observations
+
+- L’edge semble stable et non accidentel
+- La rentabilité reste forte même après augmentation du nombre de trades
+- Le système gagne surtout en pariant contre des ranges surévaluées
+- Le win rate n’est pas exceptionnel seul, mais le PnL est très bon
+- La discipline et l’absence de modifications ont protégé la performance
+
+---
+
+## 📍 Audit confirmé à ce stade
+
+- BUY_NO = meilleur signal
+- BUY_NO_STRONG = bon signal
+- BUY_YES = faible
+- BUY_YES_STRONG = très faible
+- BETWEEN = meilleur type de marché
+- GREATER_THAN = pire type de marché
+- Chicago = meilleure ville
+- NYC = correcte
+- LA = plus instable
+
+---
+
+## ⚠️ À surveiller
+
+- Tous les BUY_YES_STRONG
+- Tous les GREATER_THAN
+- Les seuils exacts (<72, >44, etc.)
+- Les trades proches de la température réelle attendue
+- Les égalités sur seuil strict
+
+---
+
+## 💡 Idées futures (NE PAS IMPLÉMENTER MAINTENANT)
+
+- Réduire ou filtrer BUY_YES_STRONG
+- Réduire l’exposition sur GREATER_THAN
+- Renforcer le cœur BUY_NO / BETWEEN
+- Ajouter plus tard les updates météo dynamiques via API
+- Automatiser l’intelligence après 100 trades
+- Préparer plus tard le déploiement VPS / AWS
+
+---
+
+## 🚀 Décision
+
+- On ne change rien au moteur
+- On continue exactement la baseline actuelle
+- Objectif suivant: 100 trades
+- Ensuite: audit final + optimisation intelligente
+[01/04/2026 14:30] Duc: ### Note humaineLe système commence à montrer un edge réel et stable. La priorité reste la discipline jusqu’à 100 trades.

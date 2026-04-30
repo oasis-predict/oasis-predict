@@ -1,0 +1,4 @@
+trade_id,date,question,city,comparison,threshold_low,threshold_high,side,entry_price,market_prob,pnl,real_outcome,real_temp
+1,2026-02-15,Will the high temp in LA be >80° on Feb 15, 2026?,Los Angeles,greater_than,80,,YES,0.62,0.62,15,
+2,2026-02-16,Will the high temp in LA be <70° on Feb 16, 2026?,Los Angeles,less_than,,70,NO,0.55,0.55,-10,
+trade_id,date,question,city,comparison,threshold_low,threshold_high,side,entry_price,market_prob,pnl,real_outcome,
