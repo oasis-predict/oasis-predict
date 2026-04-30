@@ -1,7 +1,0 @@
-ticker,title,comparison,threshold_low,threshold_high,predicted_temp_f,std_dev,consensus_temp_f,consensus_spread_f,consensus_ok,yes_allowed,range_center,distance_to_consensus,openmeteo_temp,noaa_temp,nasa_monitor_temp,signal_action,confidence_label,ai_probability_yes,yes_ask_percent,no_ask_percent,edge,risk_fraction_percent,recommended_stake_usd,estimated_entry_cost_usd
-KXHIGHLAX-26APR30-T73,"Will the **high temp in LA** be >73° on Apr 30, 2026?",greater_than,73.0,,72.6,5.0,67.95,0.1,True,True,,,67.9,68.0,,BUY_YES,MEDIUM,46.81,6.0,97.0,40.81,1.0,10.63,0.64
-KXHIGHLAX-26APR30-B70.5,"Will the **high temp in LA** be 70-71° on Apr 30, 2026?",between,70.0,71.0,72.6,5.0,67.95,0.1,True,True,70.5,2.55,67.9,68.0,,BUY_NO_STRONG,HIGH,7.3,40.0,70.0,-32.7,3.0,31.88,22.32
-KXHIGHCHI-26APR30-B55.5,"Will the high temp in Chicago be 55-56° on Apr 30, 2026?",between,55.0,56.0,56.6,8.0,53.15,4.3,False,False,55.5,2.35,55.3,51.0,,BUY_NO_STRONG,LOW,4.94,31.0,72.0,-26.06,3.0,31.88,22.95
-KXHIGHCHI-26APR30-B57.5,"Will the high temp in Chicago be 57-58° on Apr 30, 2026?",between,57.0,58.0,56.6,8.0,53.15,4.3,False,False,57.5,4.35,55.3,51.0,,BUY_NO_STRONG,LOW,4.95,29.0,80.0,-24.05,3.0,31.88,25.5
-KXHIGHLAX-26APR30-B72.5,"Will the **high temp in LA** be 72-73° on Apr 30, 2026?",between,72.0,73.0,72.6,5.0,67.95,0.1,True,True,72.5,4.55,67.9,68.0,,BUY_NO,HIGH,7.96,26.0,85.0,-18.04,2.0,21.25,18.06
-KXHIGHLAX-26APR30-T66,"Will the **high temp in LA** be <66° on Apr 30, 2026?",less_than,,66.0,72.6,5.0,67.95,0.1,True,True,,,67.9,68.0,,BUY_YES,HIGH,9.34,2.0,99.0,7.34,1.0,10.63,0.21

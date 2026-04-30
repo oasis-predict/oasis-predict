@@ -1,3 +1,0 @@
-logged_at,ticker,title,comparison,signal_action,priority,ai_probability_yes,yes_price_percent,no_price_percent,edge,recommended_stake_usd,estimated_trade_cost_usd,execution_status,real_fill_price_percent,contracts_bought,real_cost_usd,settlement_status,realized_pnl_usd,notes
-2026-04-02 21:21:18,KXHIGHCHI-26APR03-B62.5,"Will the high temp in Chicago be 62-63° on Apr 3, 2026?",between,BUY_NO,TOP,3.05,23.0,78.0,-19.95,21.25,16.57,EXECUTED,,92.39,16.57,WON,11.2,
-2026-04-07 12:06:11,KXHIGHCHI-26APR07-T38,"Will the high temp in Chicago be <38° on Apr 7, 2026?",less_than,BUY_NO_STRONG,HIGH,0.0,24.0,78.0,-24.0,31.88,24.87,PLANNED,,132.83,24.87,OPEN,,

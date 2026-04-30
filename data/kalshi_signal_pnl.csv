@@ -1,2 +1,0 @@
-ticker,title,signal_action,yes_ask_percent,ai_probability_yes,edge,confidence_score,confidence_label,resolved_outcome,trade_result,pnl_percent
-KXHIGHLAX-26MAR19-T83,"Will the **high temp in LA** be <83° on Mar 19, 2026?",BUY_NO,63.0,51.76,-11.24,56,MEDIUM,YES,LOSS,-37.0
