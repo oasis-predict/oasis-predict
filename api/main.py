@@ -5,6 +5,13 @@ from datetime import datetime
 import csv
 import os
 import re
+import subprocess 
+
+def generate_signals():
+    try:
+        subprocess.run(["python3", "main.py", "daily"], check=True)
+    except Exception as e:
+        print("Error generating signals:", e)
 
 app = FastAPI(
     title="OASIS PREDICT API",
@@ -217,6 +224,8 @@ def get_signals():
 
 @app.get("/signals/today")
 def get_today_signals():
+    generate_signals()  # IMPORTANT
+
     signals = load_signals()
     filtered = [s for s in signals if is_today_or_future(s)]
 
